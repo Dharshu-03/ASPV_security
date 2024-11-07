@@ -29,6 +29,17 @@
     html.lt-ie-10 .ie-panel {
       display: block;
     }
+
+    .reveal {
+      
+      opacity: 0;
+      transition: all 3s;
+    }
+
+    .reveal.show {
+     
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -126,7 +137,7 @@
     </section>
     <!--Presentation-->
     <section class="section-xl bg-default text-center" id="section-see-features">
-      <div class="container">
+      <div class="container reveal">
         <div class="row justify-content-lg-center">
           <div class="col-lg-10 col-xl-8">
             <h3>Consistency is the key</h3>
@@ -159,7 +170,7 @@
       <div class="container">
         <div
           class="row justify-content-md-center flex-lg-row-reverse align-items-lg-center justify-content-lg-between row-50">
-          <div class="col-md-9 col-lg-5">
+          <div class="col-md-9 col-lg-5 reveal">
             <h3 style="color: white;">Why Choose Us</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum labore in hic repudiandae inventore
               officiis architecto nihil, nemo animi adipisci unde, magni possimus saepe eligendi? Minima distinctio
@@ -171,7 +182,7 @@
       </div>
     </section>
     <section class="bg-accent">
-      <div class="container">
+      <div class="container reveal">
         <div class="row justify-content-md-center align-items-lg-end">
           <div class="col-md-8 col-lg-6 section-xl">
             <h3>Services</h3>
@@ -206,7 +217,7 @@
     </section> -->
     <!--client review-->
     <section class="section-xl bg-gray-lighter">
-      <div class="container">
+      <div class="container reveal">
         <h2 style="padding-bottom: 3rem;">What Our Clients Say?</h2>
         <div class="row row-50">
           <div class="col-md-6 col-lg-4">
@@ -231,7 +242,7 @@
           <div class="col-md-6 col-lg-4">
             <!--Blurb minimal-->
             <article class="blurb blurb-minimal">
-              <div class="unit flex-row unit-spacing-md">
+              <div class="unit flex-row unit-spacing-md reveal">
                 <div class="unit-left">
                   <div class="blurb-minimal__icon"><span class="icon linear-icon-users2"></span></div>
                 </div>
@@ -271,7 +282,7 @@
     </section>
     <!--client lists-->
     <section class="section-xl bg-default">
-      <div class="container">
+      <div class="container reveal">
         <div class="row row-50 align-items-lg-center justify-content-lg-between">
           <div class="col-lg-5">
             <h3>Our Clients</h3>
@@ -593,6 +604,23 @@
   <!--Global Mailform Output-->
   <div class="snackbars" id="form-output-global"></div>
   <!--Javascript-->
+  <script>
+const observer =new IntersectionObserver((entries)=>
+{
+  entries.forEach((entry)=>{
+  if(entry.isIntersecting){
+    entry.target.classList.add('show')
+  }
+  else
+  {
+    entry.target.classList.remove('show');
+  }
+});
+});
+
+const hiddenElements= document.querySelectorAll('.reveal');
+hiddenElements.forEach((el)=>observer.observe(el));
+  </script>
   <script src="js/core.min.js" defer></script>
   <script src="js/script.js" defer></script>
   <!--coded by ATOM-->
