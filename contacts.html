@@ -146,8 +146,8 @@
           <div class="col-md-7 col-lg-8">
             <h3>Let’s Get in Touch</h3>
             <!--RD Mailform-->
-            <form class="rd-mailform rd-mailform_style-1" data-form-output="form-output-global"
-              onsubmit="sendEmail(); reset(); return false; ">
+            <form class="rd-mailform rd-mailform_style-1" method="post" data-form-output="form-output-global"
+              action="https://script.google.com/macros/s/AKfycbyby2Ir6uAf78ScfcyQO_y947NT-p4lezEtrLK21QKwABGmawSsH1F7pXnq1UZLC1OiIw/exec">
               <div class="form-wrap form-wrap_icon linear-icon-man">
                 <input class="form-input" id="contact-name" type="text" name="name" data-constraints="@Required">
                 <label class="form-label" for="contact-name">Your name</label>
@@ -166,7 +166,7 @@
                   data-constraints="@Required"></textarea>
                 <label class="form-label" for="contact-message">Your message</label>
               </div>
-              <button class="button button-primary" type="submit">send</button>
+              <button class="button button-primary" id="submit" value="submit" type="submit">send</button>
             </form>
           </div>
         </div>
@@ -260,22 +260,17 @@
   <!--Global Mailform Output-->
   <div class="snackbars" id="form-output-global"></div>
   <!--Javascript-->
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
-  <script>
-    function sendEmail() {
-      Email.send({
-        Host: "smtp.elasticmail.com",
-        Username: "blah@gmail.com",
-        Password: "90C2D6A5F505C6DE83714EBBE812E6B46C65",
-        To: "dharshini.s.kumar@gmail.com",
-        From: document.getElementById("contact-email").value,
-        Subject: "This is the subject",
-        Body: "And this is the body"
-      }).then(
-        message => alert(message)
-      );
-    }
-  </script>
+ <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyby2Ir6uAf78ScfcyQO_y947NT-p4lezEtrLK21QKwABGmawSsH1F7pXnq1UZLC1OiIw/exec'
+const form = document.forms['contact-form']
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+  .then(response => alert("Thank you! your form is submitted successfully." ))
+  .then(() => { window.location.reload(); })
+  .catch(error => console.error('Error!', error.message))
+})
+ </script>
   <script src="js/core.min.js" defer></script>
   <script src="js/script.js" defer></script>
 </body>
